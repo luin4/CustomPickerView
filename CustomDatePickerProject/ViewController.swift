@@ -9,7 +9,9 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    private var selectContents = [String]()
+    private var selectRows = [NSInteger]()
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -52,35 +54,56 @@ class ViewController: UIViewController {
 
     @objc func buttonClicked(sender: UIButton) {
         
-        let picker = BaseDatePickerView.init(dateStyle: .date, selectDateString: "2015-04-10")
+        let picker = BaseDatePickerView.init(pickerStyle: .date, selectDateString: sender.titleLabel!.text!)
         picker.clickedConfirmHandler = { (contents: [String], selectedRows: [NSInteger]) in
-            print(contents)
+            self.selectContents = contents
+            let title = contents.joined(separator: "-")
+            sender.setTitle(title, for: .normal)
         }
         picker.show()
     }
     @objc func buttonClicked1(sender: UIButton) {
      
-        let picker = BaseDatePickerView.init(dateStyle: .month, selectDateString: "2012-6")
+        let picker = BaseDatePickerView.init(pickerStyle: .month, selectDateString: sender.titleLabel!.text!)
         picker.clickedConfirmHandler = { (contents: [String], selectedRows: [NSInteger]) in
-            print(contents)
+            self.selectContents = contents
+            let title = contents.joined(separator: "-")
+            sender.setTitle(title, for: .normal)
         }
         picker.show()
     }
     @objc func buttonClicked2(sender: UIButton) {
-        
-        let picker = BaseDatePickerView.init(dateStyle: .week(year: "2017", week: "09"), selectDateString: "")
+        if selectContents.count == 0 {
+            selectContents = ["-1", "-1"]
+        }
+        let selectYear = selectContents[0]
+        let selectWeek = selectContents[1]
+        let picker = BaseDatePickerView.init(pickerStyle: .week(year: selectYear, week: selectWeek), selectDateString: "")
         picker.clickedConfirmHandler = { (contents: [String], selectedRows: [NSInteger]) in
-            print(contents)
+            self.selectContents = contents
+            let title = contents.joined(separator: "-")
+            sender.setTitle(title, for: .normal)
         }
         picker.show()
     }
     @objc func buttonClicked3(sender: UIButton) {
+        let customList = [["测试1","测试2","测试3","测试3","测试5"],
+                          ["测试1","测试2","测试3","测试3","测试5"],
+                          ["测试1","测试2","测试3","测试3","测试5"]]
+        if selectRows.count == 0 {
+            for _ in 0..<customList.count {
+                selectRows.append(0)
+            }
+        }
         //最多为3列
-        let picker = BaseDatePickerView.init(dateStyle: .custom, customList: [["测试1","测试2","测试3","测试3","测试5"],["测试1","测试2","测试3","测试3","测试5"],["测试1","测试2","测试3","测试3","测试5"]], selectRows: [3,0,0])
+        let picker = BaseDatePickerView.init(pickerStyle: .custom, customList: customList, selectRows: selectRows)
         picker.clickedConfirmHandler = { (contents: [String], selectedRows: [NSInteger]) in
-            print(contents)
+            self.selectRows = selectedRows
+            let title = contents.joined(separator: "-")
+            sender.setTitle(title, for: .normal)
         }
         picker.show()
     }
 }
+
 

@@ -78,13 +78,13 @@ class BaseDatePickerView: UIView {
         super.init(coder: aDecoder)
     }
     //日期类型
-    convenience init(dateStyle: PickerStyle, selectDateString: String) {
+    convenience init(pickerStyle: PickerStyle, selectDateString: String) {
         self.init(frame: CGRect.zero)
-        self.pickerStyle = dateStyle
+        self.pickerStyle = pickerStyle
         
         self.setUpSubViews()
         
-        switch dateStyle {
+        switch pickerStyle {
         case .date:
             reloadDatePickerData(selectDateString: selectDateString)
         case .month:
@@ -98,9 +98,9 @@ class BaseDatePickerView: UIView {
         }
     }
     //自定义类型(最多支持3列,可扩展更多列(加参数))
-    convenience init(dateStyle: PickerStyle, customList: [[String]], selectRows: [NSInteger]) {
+    convenience init(pickerStyle: PickerStyle, customList: [[String]], selectRows: [NSInteger]) {
         self.init(frame: CGRect.zero)
-        self.pickerStyle = dateStyle
+        self.pickerStyle = pickerStyle
         
         self.setUpSubViews()
         
@@ -134,8 +134,8 @@ class BaseDatePickerView: UIView {
     
     private func addSubviewsMake() {
         
-        bottomView.backgroundColor = UIColor.red
-        lineView.backgroundColor = UIColor.blue
+        bottomView.backgroundColor = UIColor.white
+        lineView.backgroundColor = UIColor.lightGray
         pickerView.backgroundColor = UIColor.white
         
         pickerView.dataSource = self
@@ -346,7 +346,7 @@ extension BaseDatePickerView {
         
         var comps = DateComponents()
         comps = calendar.dateComponents(result.calendarSet, from: Date())
-        if selectYear==0 && selectWeek==0 {
+        if selectYear == -1 && selectWeek == -1 {
             firstSelectedRow = comps.year!
             secondSelectedRow = comps.weekOfYear!
         }else{
@@ -449,7 +449,7 @@ extension BaseDatePickerView: UIPickerViewDelegate, UIPickerViewDataSource {
                 setPickerViewSelectedRow()
             case 2:
                 thirdSelectedRow = row+1
-                selectedRows[2] = thirdSelectedRow
+                selectedRows[2] = thirdSelectedRow-1
             default:
                 break
             }
@@ -466,7 +466,7 @@ extension BaseDatePickerView: UIPickerViewDelegate, UIPickerViewDataSource {
                 setPickerViewSelectedRow()
             case 1:
                 secondSelectedRow = row+1
-                selectedRows[1] = secondSelectedRow
+                selectedRows[1] = secondSelectedRow-1
             default:
                 break
             }
