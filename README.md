@@ -5,7 +5,7 @@ Demo写的比较粗糙，还请见谅！
 
 预览图：
 
-![iamge](https://github.com/ql502151557/CustomPickerView/IMG_2756.PNG)
-![iamge](https://github.com/ql502151557/CustomPickerView/IMG_2757.PNG)
-![iamge](https://github.com/ql502151557/CustomPickerView/IMG_2758.PNG)
-![iamge](https://github.com/ql502151557/CustomPickerView/IMG_2759.PNG)
+![iamge](https://github.com/ql502151557/CustomPickerView/blob/master/IMG_2756.PNG)
+![iamge](https://github.com/ql502151557/CustomPickerView/blob/master/IMG_2757.PNG)
+![iamge](https://github.com/ql502151557/CustomPickerView/blob/master/IMG_2758.PNG)
+![iamge](https://github.com/ql502151557/CustomPickerView/blob/master/IMG_2759.PNG)
